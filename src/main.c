@@ -4,7 +4,7 @@
 extern void big_boobs();
 
 void kmain(void) {
-    puhlog_print("Running Puhrnel ");
+    puhlog_print("Running ");
     puhlog_print(PUHPRETTYFULLNAME);
     puhlog_print("\n");
 

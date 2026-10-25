@@ -1,6 +1,7 @@
 #include "define.h"
 #include "log.h"
 #include "syscall.h"
+#include "puh_metadata.h"
 
 void puhlog_syscall(uint32_t* registers) {
     uint32_t syscall = registers[REG_EBX];
@@ -23,8 +24,25 @@ void puhinfo_syscall(uint32_t* registers) {
     uint32_t syscall = registers[REG_EBX];
 
     switch (syscall) {
+        case PUHINFO_CODENAME: {
+            registers[REG_EAX] = (uint32_t)PUHCODENAME;
+            break;
+        }
         case PUHINFO_VERSION: {
-            return;
+            registers[REG_EAX] = (uint32_t)PUHVERSION;
+            break;
+        }
+        case PUHINFO_FULLNAME: {
+            registers[REG_EAX] = (uint32_t)PUHFULLNAME;
+            break;
+        }
+        case PUHINFO_PRETTYCODENAME: {
+            registers[REG_EAX] = (uint32_t)PUHPRETTYCODENAME;
+            break;
+        }
+        case PUHINFO_PRETTYFULLNAME: {
+            registers[REG_EAX] = (uint32_t)PUHPRETTYFULLNAME;
+            break;
         }
     }
 }
