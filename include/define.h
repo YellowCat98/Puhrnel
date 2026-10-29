@@ -7,6 +7,8 @@
 typedef unsigned short uint16_t;
 typedef unsigned char uint8_t;
 typedef unsigned int uint32_t;
+typedef unsigned int uintptr_t; // FRAGILE! this will DIE on 32bit. assuming ill ever go 32bit lol
+typedef unsigned long long uint64_t;
 
 // i am not memorizing this so im just gonna
 #define REG_EDI 0
