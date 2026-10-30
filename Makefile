@@ -57,7 +57,7 @@ $(OUT)/$(PUHRNEL_ISO): $(OUT)/puhImage
 	grub-mkrescue -o $@ $(BUILD)/iso_root -volid $(PROJECT_ISOLABEL)
 
 run: $(OUT)/$(PUHRNEL_ISO)
-	qemu-system-x86_64 -cdrom $(OUT)/$(PUHRNEL_ISO)
+	qemu-system-i386 -cdrom $(OUT)/$(PUHRNEL_ISO)
 
 clean:
 	rm -rf $(BUILD) $(OUT)

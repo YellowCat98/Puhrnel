@@ -2,6 +2,7 @@
 #include "puh_metadata.h"
 #include "multiboot.h"
 #include "framebuffer.h"
+#include "font8x8_basic.h"
 
 extern void big_boobs();
 
@@ -34,9 +35,27 @@ void kmain(uint32_t magic, uint32_t mbi_addr) {
         ptr += (mb_tag->size + 7) & ~7;
     }
 
-    for (uint32_t y = 100; y < 200; y++) {
-        for (uint32_t x = 100; x < 200; x++) {
-            puhfb_putpixel(x, y, 0x00FF00);
+    // glpyh drawing test
+
+    uint32_t x6 = 100;
+    uint32_t y6 = 100;
+
+    for (uint32_t row = 0; row < 8; row++) {
+        for (uint32_t column = 0; column < 8; column++) {
+            if (font8x8_basic['6'][row] & (1 << column)) {
+                puhfb_putpixel(x6 + column, y6 + row, 0x00FF00);
+            }
+        }
+    }
+
+    uint32_t x7 = 110;
+    uint32_t y7 = 100;
+
+    for (uint32_t row = 0; row < 8; row++) {
+        for (uint32_t column = 0; column < 8; column++) {
+            if (font8x8_basic['7'][row] & (1 << column)) {
+                puhfb_putpixel(x7 + column, y7 + row, 0x00FF00);
+            }
         }
     }
     
