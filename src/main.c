@@ -1,8 +1,8 @@
-#include "vgalog.h"
+#include "log.h"
 #include "puh_metadata.h"
 #include "multiboot.h"
 #include "framebuffer.h"
-#include "font8x8_basic.h"
+#include "extra/font8x8_basic.h"
 
 extern void big_boobs();
 
@@ -35,16 +35,8 @@ void kmain(uint32_t magic, uint32_t mbi_addr) {
         ptr += (mb_tag->size + 7) & ~7;
     }
 
-    // glpyh drawing test
-
-    const char* tongue = PUHPRETTYFULLNAME;
-
-    for (const char* p = tongue; *p != '\0'; ++p) {
-        static uint32_t x = 0;
-        char c = *p;
-        puhfb_putchar(c, x, 0, 0xAAAAAA, font8x8_basic);
-        x += 8;
-    }
+    puhlog_print("WELCOME TO\n");
+    puhlog_print("BRAZZERS IS FREE!\n");
     
 
     while (1) {

@@ -1,5 +1,5 @@
-#ifndef LOG_H
-#define LOG_H
+#ifndef VGALOG_H
+#define VGALOG_H
 
 #include "define.h"
 

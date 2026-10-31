@@ -36,3 +36,12 @@ void puhfb_putchar(unsigned char character, uint32_t x, uint32_t y, uint32_t col
         }
     }
 }
+
+void puhfb_clear(uint32_t color) {
+    volatile uint32_t *pixel_ptr = (volatile uint32_t *)fb;
+    uint32_t total_pixels_buffer = (fb_pitch / 4) * fb_height;
+
+    for (uint32_t i = 0; i < total_pixels_buffer; i++) {
+        pixel_ptr[i] = color;
+    }
+}

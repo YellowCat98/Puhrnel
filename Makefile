@@ -20,10 +20,10 @@ CODEGEN = $(BUILD)/codegen
 
 PUHRNEL_ISO = $(PROJECT_FULLNAME).iso
 
-ASM = $(wildcard src/*.asm)
-C = $(wildcard src/*.c)
-ASM_OBJ = $(patsubst src/%.asm,$(BUILD)/%.asm.o,$(ASM))
-C_OBJ = $(patsubst src/%.c,$(BUILD)/%.c.o,$(C))
+ASM = $(shell find src -type f -name '*.asm')
+C = $(shell find src -type f -name '*.c')
+ASM_OBJ = $(patsubst src/%.asm,$(BUILD)/obj/asm/%.asm.o,$(ASM))
+C_OBJ = $(patsubst src/%.c,$(BUILD)/obj/c/%.c.o,$(C))
 OBJ = $(ASM_OBJ) $(C_OBJ)
 
 .PHONY: all clean run
@@ -41,10 +41,12 @@ $(CODEGEN)/puh_metadata.h: | $(CODEGEN)
 		'$(PROJECT_PRETTYCODENAME)' \
 		'$(PROJECT_PRETTYFULLNAME)' > $@
 
-$(BUILD)/%.asm.o: src/%.asm | $(BUILD)
+$(BUILD)/obj/asm/%.asm.o: src/%.asm | $(BUILD)
+	@mkdir -p $(dir $@)
 	$(NASM) $(NASMFLAGS) $< -o $@
 
-$(BUILD)/%.c.o: src/%.c | $(BUILD)
+$(BUILD)/obj/c/%.c.o: src/%.c | $(BUILD)
+	@mkdir -p $(dir $@)
 	$(CC) $(CC_FLAGS) -c $< -o $@
 
 $(OUT)/puhImage: $(OBJ) linker.ld | $(OUT)
