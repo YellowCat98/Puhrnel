@@ -25,3 +25,14 @@ void puhfb_putpixel(uint32_t x, uint32_t y, uint32_t color) {
 
     *pixel = color;
 }
+
+void puhfb_putchar(unsigned char character, uint32_t x, uint32_t y, uint32_t color, const char (*font)[8]) {
+    if (character >= 128) return;
+    for (uint32_t row = 0; row < 8; row++) {
+        for (uint32_t column = 0; column < 8; column++) {
+            if (font[character][row] & (1 << column)) {
+                puhfb_putpixel(x + column, y + row, color);
+            }
+        }
+    }
+}

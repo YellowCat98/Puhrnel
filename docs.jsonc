@@ -3,7 +3,7 @@
 {
     "syscalls/interrupts": {
         "syscall convention": {
-            "eax": "which syscall kind (PUHLOG, etc.)",
+            "eax": "which syscall kind (PUHVGALOG, etc.)",
             "ebx": "which syscall",
             "ecx": "arg 1",
             "edx": "arg 2",
@@ -17,35 +17,35 @@
         // can be used by both userspace and kernel
         "0x80": {
             "contents": {
-                "PUHLOG, 0": {
-                    "description": "Printing utilities.",
-                    "PUHLOG_PRINT, 0": {
+                "PUHVGALOG, 0": {
+                    "description": "Printing utilities, VGA only.",
+                    "PUHVGALOG_PRINT, 0": {
                         "description": "Simply prints to the screen.",
                         "arg 1": "Pointer to the message itself",
                         "arg 2": "Color" // TODO: DOCUMENT vga_color
                     },
-                    "PUHLOG_CLEAR": "Clears the screen."
+                    "PUHVGALOG_CLEAR": "Clears the screen."
                 },
                 "PUHINFO, 1": {
                     "description": "Kernel information.",
 
-                    "PUHLOG_CODENAME, 0": "Returns the kernel codename.",
-                    "PUHLOG_VERSION, 1": "Returns the kernel version.",
-                    "PUHLOG_FULLNAME, 2": "Full kernel name in the form of puhrnel_$(codename)_v$(version)",
-                    "PUHLOG_PRETTYCODENAME, 3": "Prettified version of the codename.",
-                    "PUHLOG_PRETTYFULLNAME, 4": "Prettified version of the full name."
+                    "PUHINFO_CODENAME, 0": "Returns the kernel codename.",
+                    "PUHINFO_VERSION, 1": "Returns the kernel version.",
+                    "PUHINFO_FULLNAME, 2": "Full kernel name in the form of puhrnel_$(codename)_v$(version)",
+                    "PUHINFO_PRETTYCODENAME, 3": "Prettified version of the codename.",
+                    "PUHINFO_PRETTYFULLNAME, 4": "Prettified version of the full name."
                 }
             }
         }
         /*
         example:
-            mov eax, 0 ; PUHLOG
+            mov eax, 0 ; PUHVGALOG
             mov ebx, 0 ; PRINT
             mov ecx, pointer_to_message ; arg 1
             int 0x80
 
         example 2:
-            mov eax, 0 ; PUHLOG
+            mov eax, 0 ; PUHVGALOG
             mov ebx, 1 ; CLEAR
             int 0x80
         */

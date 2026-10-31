@@ -1,4 +1,4 @@
-#include "log.h"
+#include "vgalog.h"
 #include "puh_metadata.h"
 #include "multiboot.h"
 #include "framebuffer.h"
@@ -37,26 +37,13 @@ void kmain(uint32_t magic, uint32_t mbi_addr) {
 
     // glpyh drawing test
 
-    uint32_t x6 = 100;
-    uint32_t y6 = 100;
+    const char* tongue = PUHPRETTYFULLNAME;
 
-    for (uint32_t row = 0; row < 8; row++) {
-        for (uint32_t column = 0; column < 8; column++) {
-            if (font8x8_basic['6'][row] & (1 << column)) {
-                puhfb_putpixel(x6 + column, y6 + row, 0x00FF00);
-            }
-        }
-    }
-
-    uint32_t x7 = 110;
-    uint32_t y7 = 100;
-
-    for (uint32_t row = 0; row < 8; row++) {
-        for (uint32_t column = 0; column < 8; column++) {
-            if (font8x8_basic['7'][row] & (1 << column)) {
-                puhfb_putpixel(x7 + column, y7 + row, 0x00FF00);
-            }
-        }
+    for (const char* p = tongue; *p != '\0'; ++p) {
+        static uint32_t x = 0;
+        char c = *p;
+        puhfb_putchar(c, x, 0, 0xAAAAAA, font8x8_basic);
+        x += 8;
     }
     
 

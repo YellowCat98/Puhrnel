@@ -1,4 +1,4 @@
-#include "log.h"
+#include "vgalog.h"
 
 static int cursor_x = 0;
 static int cursor_y = 0;
@@ -7,7 +7,7 @@ static inline uint16_t vga_entry(unsigned char uc, uint8_t color) {
     return (uint16_t)uc | (uint16_t)color << 8;
 }
 
-static void puhlog_scroll(void) {
+static void puhvgalog_scroll(void) {
     volatile uint16_t* vga_buffer = (volatile uint16_t*)VGA_ADDRESS;
 
     for (int y = 1; y < VGA_HEIGHT; ++y) {
@@ -25,7 +25,7 @@ static void puhlog_scroll(void) {
     cursor_y = VGA_HEIGHT - 1;
 }
 
-void puhlog_clear(void) {
+void puhvgalog_clear(void) {
     volatile uint16_t* vga_buffer = (volatile uint16_t*)VGA_ADDRESS;
     uint16_t entry = vga_entry(' ', vgaColorBlack);
 
@@ -37,11 +37,11 @@ void puhlog_clear(void) {
     cursor_y = 0;
 }
 
-void puhlog_print(const char* message) {
-    return puhlog_printc(message, vgaColorWhite);
+void puhvgalog_print(const char* message) {
+    return puhvgalog_printc(message, vgaColorWhite);
 }
 
-void puhlog_printc(const char* message, uint8_t color) {
+void puhvgalog_printc(const char* message, uint8_t color) {
     volatile uint16_t* vga_buffer = (volatile uint16_t*)VGA_ADDRESS;
 
     for (int i = 0; message[i] != '\0'; ++i) {
@@ -60,7 +60,7 @@ void puhlog_printc(const char* message, uint8_t color) {
         }
 
         if (cursor_y >= VGA_HEIGHT) {
-            puhlog_scroll();
+            puhvgalog_scroll();
         }
     }
 }

@@ -15,8 +15,8 @@ enum vga_color {
     vgaColorWhite = 15,
 };
 
-void puhlog_clear();
-void puhlog_print(const char* message); // THIS IS SIMPLY A WRAPPER AROUND puhlog_printc! DEFAULTS TO WHITE.
-void puhlog_printc(const char* message, uint8_t color);
+void puhvgalog_clear();
+void puhvgalog_print(const char* message); // THIS IS SIMPLY A WRAPPER AROUND puhvgalog_printc! DEFAULTS TO WHITE.
+void puhvgalog_printc(const char* message, uint8_t color);
 
 #endif

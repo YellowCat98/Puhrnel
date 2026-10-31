@@ -3,11 +3,11 @@
 
 // all syscalls and syscall kinds
 
-#define PUHLOG 0
+#define PUHVGALOG 0
 #define PUHINFO 1
 
-#define PUHLOG_PRINT 0
-#define PUHLOG_CLEAR 1
+#define PUHVGALOG_PRINT 0
+#define PUHVGALOG_CLEAR 1
 
 #define PUHINFO_CODENAME 0
 #define PUHINFO_VERSION 1
